@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
+import { Hero } from './hero';
 
-export class Hero {
-  id: number;
-  name: string;
-}
+// the previous example violated Single Responsibility Principle
+// by being responsible for detail and a list
 
 const HEROES: Hero[] = [
   { id: 11, name: 'Mr. Nice' },
@@ -22,6 +21,7 @@ const HEROES: Hero[] = [
 
 // line 34 uses click event and calls onSelect method, passing hero var defined in the ngFor
 
+// notice line 38 uses hero as the target of property binding, need to make it an input prop
 
 @Component({
   selector: 'my-app',
@@ -35,14 +35,7 @@ const HEROES: Hero[] = [
         <span class="badge">{{hero.id}}</span> {{hero.name}}
       </li>
     </ul>
-    <div *ngIf="selectedHero">
-      <h2>{{selectedHero.name}} details!</h2>
-      <div><label>id: </label>{{selectedHero.id}}</div>
-      <div>
-        <label>name: </label>
-        <input [(ngModel)]="selectedHero.name" placeholder="name">
-      </div>
-    </div>
+    <my-hero-detail [hero]="selectedHero"></my-hero-detail>
   `,
   styles: [`
     .selected {
