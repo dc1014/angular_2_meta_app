@@ -1,27 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Hero } from './hero';
+import { HeroService } from './hero.service';
 
 // the previous example violated Single Responsibility Principle
 // by being responsible for detail and a list
-
-const HEROES: Hero[] = [
-  { id: 11, name: 'Mr. Nice' },
-  { id: 12, name: 'Narco' },
-  { id: 13, name: 'Bombasto' },
-  { id: 14, name: 'Celeritas' },
-  { id: 15, name: 'Magneta' },
-  { id: 16, name: 'RubberMan' },
-  { id: 17, name: 'Dynama' },
-  { id: 18, name: 'Dr IQ' },
-  { id: 19, name: 'Magma' },
-  { id: 20, name: 'Tornado' }
-];
 
 // line 33 applies one-way data binding, [], meaning it flows from that expression to a property of class
 
 // line 34 uses click event and calls onSelect method, passing hero var defined in the ngFor
 
 // notice line 38 uses hero as the target of property binding, need to make it an input prop
+
+// now we want to use the Hero service.
 
 @Component({
   selector: 'my-app',
@@ -85,12 +75,27 @@ const HEROES: Hero[] = [
       margin-right: .8em;
       border-radius: 4px 0 0 4px;
     }
-  `]
+  `],
+  providers: [ HeroService ]
 })
-export class AppComponent {
+
+export class AppComponent implements OnInit {
   title = 'Tour of Heroes';
-  heroes = HEROES; // infers type from above array
+  heroes: Hero[]; // can no longer infer type
   selectedHero: Hero; // replaces static hero
+
+  constructor(private heroService: HeroService) { } // but still needs injector
+
+  // this.heroes = this.heroService.getHeroes(); - instead, make a method
+
+  getHeroes(): void {
+    this.heroService.getHeroes().then(heroes => this.heroes = heroes);
+  }
+
+  ngOnInit(): void {
+    this.getHeroes();
+  }
+
 
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
