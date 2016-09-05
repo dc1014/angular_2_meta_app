@@ -16,4 +16,8 @@ export class HeroService {
       .then(() => this.getHeroes());
   } // stub for simulating latency
 
+  getHero(id: number): Promise<Hero> {
+    return this.getHeroes()
+      .then(heroes => heroes.find(hero => hero.id === id));
+  }
 }
