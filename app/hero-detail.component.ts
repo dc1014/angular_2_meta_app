@@ -30,4 +30,9 @@ export class HeroDetailComponent implements OnInit {
     window.history.back(); // can take outside of app, guard with CanDeactivate guard
   }
 
+  save(): void {
+    this.heroService.update(this.hero)
+      .then(this.goBack)
+  }
+
 }
