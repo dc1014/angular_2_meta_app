@@ -15,7 +15,8 @@ import { DashboardComponent } from './dashboard.component';
 import { HeroService }         from './hero.service';
 import { HeroSearchComponent } from './hero-search.component';
 import { routing } from './app.routing';
-
+import { Logger } from './logger.service';
+import { ClickMeComponent } from './click-me.component';
 // in memory web api module replaces default HTTP client backend with in-memory web API
 
 // also need to add update and delete methods against persistent backend
@@ -33,10 +34,12 @@ import { routing } from './app.routing';
     DashboardComponent,
     HeroDetailComponent,
     HeroesComponent,
-    HeroSearchComponent
+    HeroSearchComponent,
+    ClickMeComponent
   ],
   providers: [
-    HeroService
+    HeroService,
+    Logger
   ],
   bootstrap: [ AppComponent ]
 })

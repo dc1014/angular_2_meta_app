@@ -16,6 +16,7 @@ import { HeroService } from './hero.service';
       <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
     </nav>
     <router-outlet></router-outlet>
+    <click-me></click-me>
   `,
   styleUrls: ['app/app.component.css']
 })
