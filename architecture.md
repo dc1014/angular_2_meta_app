@@ -170,3 +170,93 @@ Data binding is not only used for template/component data passing, but also for 
 
 ## Directives 
 
+Angular components are dynamics...when Angular renders them, it transforms the DOM according to directives 
+
+A directive is a class with directive metadata. Uses the `@Directive` decorator to attach the metadata to the class. 
+
+A component is a directive-with-a-template. Fitting that the `@Component` decorator is actually a `@Directive` decorator extended with template-oriented features...
+
+Thus **a component is technically a directive, but components are valuable concepts worth individual focus.
+
+Other directives
+
+- Structural
+- Attribute 
+
+Tend to appear within an element tag...but nmore often as the target of an assignment or prop binding.
+
+*Structural directives* alter layout by adding, removing, and replacing elements in DOM.
+
+This example uses two directives:
+
+```
+<li *ngFor="let hero of heroes"></li>
+<hero-detail *ngIf="selectedHero"></hero-detail>
+```
+
+`*ngFor` prints one list element for each hero.
+`*ngIf` includes the `HeroDetail` component only if a selected hero exists. 
+
+`ngModel` directive, which implements two way data binding, is an example of an attribute direcctive. `ngModel` modifies the behavior of an existing element (typically `<input>`) by setting its dispaly value property and responding to change events. 
+
+`ngSwitch` is another layout...for when we want one in a list. 
+`ngStyle` and `ngClass` are others. 
+
+## Services
+
+Any value, function, or features your app needs. 
+
+Examples - logging, data, message bus, tax calculator, application configs
+
+Components consume said services. For example, a logger service:
+
+```
+export class Logger {
+  log(msg: any)   { console.log(msg); }
+  error(msg: any) { console.error(msg); }
+  warn(msg: any)  { console.warn(msg); }
+}
+
+```
+
+Components are not designed to be in charge of data management, fetching, validation, or logging. Such tasks belong in services. Components only enable the user's experience by mediating the view (rendered by the template) and the app logic (which includes some notion of a model)
+
+## Dependency Injection 
+
+How you get dependencies, mostly services, into a component. Dependencies are injected in the constructor of the component. It asks the `injector` to provide said services. 
+
+Interesting - the injector maintains a container of service instances it has already created. If a service is requested that is not in the container, it will make one in the container before returning the service to angular. 
+
+Services, and other dependencies, must be registered as providers, so the injector is aware of the dependency to be injected. 
+
+In general, the `root module` should get the `providers` so they are available everyone.
+
+Also works at the component level. 
+
+Each new instance of the component means a new instance of the service (because constructor)
+
+## Wrap Up
+
+So now we've got the main parts:
+
+1. Modules
+2. Components
+3. Templates
+4. Metadata
+5. Data Binding
+6. Directives
+7. Services
+8. Dependency Injection
+
+But other features include:
+
+* animations 
+* change detection (zones of async activity and change detection strats)
+* events 
+* forms
+* http
+* lifecycle hooks
+* pipes
+* router
+* testing 
+

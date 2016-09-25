@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Headers, Http } from '@angular/http';
-
+import { Logger } from './logger.service';
 import 'rxjs/add/operator/toPromise';
 
 import { Hero } from './hero';
@@ -8,7 +8,10 @@ import { Hero } from './hero';
 @Injectable()
 
 export class HeroService {
-  constructor(private http: Http) { }
+  constructor(
+    private http: Http,
+    private logger: Logger
+  ) { }
 
   private heroesUrl = 'app/heroes'; // URL to web api
 
@@ -50,7 +53,12 @@ export class HeroService {
   getHeroes(): Promise<Hero[]> {
     return this.http.get(this.heroesUrl) // returns RXJS observable
       .toPromise() // makes observable into a promise
-      .then(response => response.json().data as Hero[]) // response json has single property, data, holds array of heroes
+      .then(response => {
+        const heroes = response.json().data as Hero[]
+        this.logger.log(`Fetched ${heroes.length} heroes`); // added to demonstrate logger service
+
+        return heroes
+      }) // response json has single property, data, holds array of heroes
       .catch(this.handleError);
   }
 
