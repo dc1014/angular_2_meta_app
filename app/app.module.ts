@@ -20,6 +20,7 @@ import { ClickMeComponent } from './click-me.component';
 import { KeyUpComponent_v1, KeyUpComponent_v2, KeyUpComponent_v3, KeyUpComponent_v4, } from './keyup.component';
 import { LoopbackComponent } from './loop-back.component';
 import { LittleTourComponent } from './little-tour.component';
+import { HeroFormComponent } from './hero-form.component';
 
 // in memory web api module replaces default HTTP client backend with in-memory web API
 
@@ -46,6 +47,7 @@ import { LittleTourComponent } from './little-tour.component';
     KeyUpComponent_v4,
     LoopbackComponent,
     LittleTourComponent,
+    HeroFormComponent
   ],
   providers: [
     HeroService,

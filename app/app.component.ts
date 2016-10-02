@@ -30,6 +30,7 @@ import { HeroService } from './hero.service';
     <h2>Loopback</h2>
     <loop-back></loop-back>
     <little-tour></little-tour>
+    <hero-form></hero-form>
 
   `,
   styleUrls: ['app/app.component.css']
